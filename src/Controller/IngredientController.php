@@ -22,7 +22,7 @@ class IngredientController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[Route('/ingredient', name: 'app_ingredient', methods: ['GET'])]
+    #[Route('/ingredient', name: 'ingredient.index', methods: ['GET'])]
     public function index(IngredientRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
         $ingredients = $paginator->paginate(
@@ -36,12 +36,12 @@ class IngredientController extends AbstractController
     }
 
     /**
-     * This function display a form to create an ingredient
+     * This function add a new ingredient
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
      * @return Response
-     * 
-     */
-
-    #[Route('/ingredient/nouveau', 'ingredient.new', methods: ['GET', 'POST'])]
+     */ #[Route('/ingredient/nouveau', 'ingredient.new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $ingredient = new Ingredient();
@@ -55,7 +55,7 @@ class IngredientController extends AbstractController
 
             $this->addFlash('success', 'Ingrédient ajouté avec succès');
 
-            return $this->redirectToRoute('app_ingredient');
+            return $this->redirectToRoute('ingredient.index');
         } else {
         }
 
@@ -86,11 +86,26 @@ class IngredientController extends AbstractController
 
             $this->addFlash('success', 'Ingrédient modifié avec succès');
 
-            return $this->redirectToRoute('app_ingredient');
+            return $this->redirectToRoute('ingredient.index');
         }
 
         return $this->render('pages/ingredient/edit.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+    /**
+     * This function delete one ingredient
+     *
+     * @param EntityManagerInterface $manager
+     * @param Ingredient $ingredient
+     * @return Response
+     */ #[Route('/ingredient/suppression/{id}', 'ingredient.delete', methods: ['GET'])]
+    public function delete(EntityManagerInterface $manager, Ingredient $ingredient): Response
+    {
+        $manager->remove($ingredient);
+        $manager->flush();
+        $this->addFlash('success', 'Ingrédient supprimé avec succès');
+
+        return $this->redirectToRoute('ingredient.index');
     }
 }
