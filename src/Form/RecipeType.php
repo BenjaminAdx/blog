@@ -27,8 +27,8 @@ class RecipeType extends AbstractType
             case 'recipe.new':
                 $labelSubmit = "Créer ma recette";
                 break;
-            case 'ingredient.edit':
-                $labelSubmit = "Modifier mon ingrédient";
+            case 'recipe.edit':
+                $labelSubmit = "Modifier ma recette";
                 break;
         };
         $builder
@@ -113,19 +113,20 @@ class RecipeType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
+                'required' => false,
                 'constraints' => [
-                    new Assert\NotNull(),
                     new Assert\Positive(),
                     new Assert\LessThan(1001)
                 ]
             ])
             ->add('isFavorite', CheckboxType::class, [
                 'attr' => [
-                    'class' => 'form-check-input ms-4'
+                    'class' => 'form-check-input'
                 ],
-                'label' => 'Favoris ?',
+                'required' => false,
+                'label' => 'Mettre en Favoris ?',
                 'label_attr' => [
-                    'class' => 'form-check-label mb-4'
+                    'class' => 'form-check-label'
                 ]
             ])
             ->add('ingredients', EntityType::class, [
