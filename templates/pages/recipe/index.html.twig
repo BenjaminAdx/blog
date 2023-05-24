@@ -36,10 +36,10 @@
 							<td>{{(recipe.price is null) ? 'Non renseigné' : recipe.price ~ ' €'}}</td>
 							<td>{{ recipe.createdAt|date("d/m/Y")}}</td>
 							<td>
-								<a href="#" class="btn btn-info">Modifier</a>
+								<a href="{{ path('recipe.edit', {'id': recipe.id}) }}" class="btn btn-info">Modifier</a>
 							</td>
 							<td>
-								<a href="#" onclick="return confirm('Voulez-vous vraiment supprimer cette recette ?')" class="btn btn-danger">Supprimer</a>
+								<a href="{{ path('recipe.delete', {'id': recipe.id}) }}" onclick="return confirm('Voulez-vous vraiment supprimer cette recette ?')" class="btn btn-danger">Supprimer</a>
 							</td>
 						</tr>
 					{% endfor %}
