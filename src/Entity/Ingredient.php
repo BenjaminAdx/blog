@@ -8,7 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
-#[UniqueEntity('name')]
+#[UniqueEntity('name', groups: ['create'])]
 class Ingredient
 {
     #[ORM\Id]

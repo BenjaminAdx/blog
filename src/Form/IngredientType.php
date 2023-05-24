@@ -6,6 +6,7 @@ use App\Entity\Ingredient;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -68,6 +69,16 @@ class IngredientType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Ingredient::class,
+            'validation_groups' => function (FormInterface $form) {
+                $data = $form->getData();
+                $groups = ['Default'];
+
+                if ($data && $data->getId() === null) {
+                    $groups[] = 'create';
+                }
+
+                return $groups;
+            }
         ]);
     }
 }
