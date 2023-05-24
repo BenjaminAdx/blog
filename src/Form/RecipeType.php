@@ -10,7 +10,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
@@ -43,11 +42,6 @@ class RecipeType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
-                'constraints' => [
-                    new Assert\Length(['min' => 2, 'max' => 50]),
-                    new Assert\NotBlank()
-                ]
-
             ])
             ->add('time', IntegerType::class, [
                 'attr' => [
@@ -58,10 +52,6 @@ class RecipeType extends AbstractType
                 'label' => 'Temps (en minutes)',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\Positive(),
-                    new Assert\LessThan(1441)
                 ],
                 'required' => false,
             ])
@@ -75,10 +65,6 @@ class RecipeType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
-                'constraints' => [
-                    new Assert\Positive(),
-                    new Assert\LessThan(51)
-                ],
                 'required' => false,
             ])
             ->add('difficulty', RangeType::class, [
@@ -91,10 +77,6 @@ class RecipeType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
-                'constraints' => [
-                    new Assert\Positive(),
-                    new Assert\LessThan(6)
-                ],
                 'required' => false,
             ])
             ->add('description', TextareaType::class, [
@@ -105,9 +87,6 @@ class RecipeType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
-                'constraints' => [
-                    new Assert\NotBlank()
-                ]
             ])
             ->add('price', MoneyType::class, [
                 'attr' => [
@@ -118,10 +97,7 @@ class RecipeType extends AbstractType
                     'class' => 'form-label mt-4'
                 ],
                 'required' => false,
-                'constraints' => [
-                    new Assert\Positive(),
-                    new Assert\LessThan(1001)
-                ]
+                'currency' => 'EUR'
             ])
             ->add('isFavorite', CheckboxType::class, [
                 'attr' => [

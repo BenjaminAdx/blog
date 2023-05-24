@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[UniqueEntity('name', groups: ['create'])]
+#[UniqueEntity('name', groups: ['create'], message: 'Ce nom est déjà utilisé')]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 class Recipe
@@ -26,13 +26,13 @@ class Recipe
     private ?string $name = null;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\Positive()]
-    #[Assert\LessThan(1441)]
+    #[Assert\Positive(message: 'Le temps doit etre positif')]
+    #[Assert\LessThan(1441, message: 'Le temps doit etre inférieur à 1440 minutes')]
     private ?int $time = null;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\Positive()]
-    #[Assert\LessThan(51)]
+    #[Assert\Positive(message: 'Le nombre de personnes doit etre positif')]
+    #[Assert\LessThan(51, message: 'Le nombre de personnes doit etre inférieur à 50')]
     private ?int $nbPeople = null;
 
     #[ORM\Column(nullable: true)]
@@ -45,8 +45,8 @@ class Recipe
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\Positive()]
-    #[Assert\LessThan(1001)]
+    #[Assert\Positive(message: 'Le prix doit etre positif')]
+    #[Assert\LessThan(1001, message: 'Le prix doit etre inférieur à 1000 €')]
     private ?float $price = null;
 
     #[ORM\Column]

@@ -8,7 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
-#[UniqueEntity('name', groups: ['create'])]
+#[UniqueEntity('name', groups: ['create'], message: 'Ce nom est déjà utilisé')]
 class Ingredient
 {
     #[ORM\Id]
@@ -23,8 +23,8 @@ class Ingredient
 
     #[ORM\Column]
     #[Assert\NotNull()]
-    #[Assert\Positive()]
-    #[Assert\LessThan(200)]
+    #[Assert\Positive(message: 'Le prix doit être positif')]
+    #[Assert\LessThan(200, message: 'Le prix doit être inférieur à 200 €')]
     private ?float $price = null;
 
     #[ORM\Column]
