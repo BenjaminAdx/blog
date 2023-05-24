@@ -56,9 +56,7 @@ class IngredientController extends AbstractController
             $this->addFlash('success', 'Ingrédient ajouté avec succès');
 
             return $this->redirectToRoute('ingredient.index');
-        } else {
         }
-
         return $this->render('pages/ingredient/new.html.twig', [
             'form' => $form->createView()
         ]);

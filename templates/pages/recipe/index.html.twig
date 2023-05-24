@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Chezbibi Mes Ingredients
+{% block title %}ChezBibi Mes Recettes
 {% endblock %}
 
 {% block body %}
 	<div class="container mt-4">
-		<h1>Mes ingrédients</h1>
-		<a href="{{ path('ingredient.new') }}" class="btn btn-primary mt-4">Créer un ingrédient</a>
+		<h1>Mes recettes</h1>
+		<a href="{{ path('recipe.new') }}" class="btn btn-primary mt-4">Créer une recette</a>
 
 		{# read and display just one flash message #}
 		{% for message in app.flashes('success') %}
@@ -14,12 +14,13 @@
 				{{ message }}
 			</div>
 		{% endfor %}
-		{% if not ingredients.items is same as([]) %}
+		{% if not recipes.items is same as([]) %}
 			<table class="table table-hover mt-4">
 				<thead>
 					<tr>
 						<th scope="col">Numéro</th>
 						<th scope="col">Nom</th>
+						<th scope="col">Difficulté</th>
 						<th scope="col">Prix</th>
 						<th scope="col">Date de création</th>
 						<th scope="col">Edition</th>
@@ -27,32 +28,32 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for ingredient in ingredients %}
+					{% for recipe in recipes %}
 						<tr class="table-primary">
-							<th scope="row">{{ingredient.id}}</th>
-							<td>{{ingredient.name}}</td>
-							<td>{{ingredient.price}}
-								€</td>
-							<td>{{ ingredient.createdAt|date("d/m/Y")}}</td>
+							<th scope="row">{{recipe.id}}</th>
+							<td>{{recipe.name}}</td>
+							<td>{{(recipe.difficulty is null) ? 'Non renseigné' : recipe.difficulty}}</td>
+							<td>{{(recipe.price is null) ? 'Non renseigné' : recipe.price ~ ' €'}}</td>
+							<td>{{ recipe.createdAt|date("d/m/Y")}}</td>
 							<td>
-								<a href="{{ path('ingredient.edit', {'id': ingredient.id}) }}" class="btn btn-info">Modifier</a>
+								<a href="#" class="btn btn-info">Modifier</a>
 							</td>
 							<td>
-								<a href="{{ path('ingredient.delete', {'id': ingredient.id}) }}" onclick="return confirm('Voulez-vous vraiment supprimer cet ingrédient ?')" class="btn btn-danger">Supprimer</a>
+								<a href="#" onclick="return confirm('Voulez-vous vraiment supprimer cette recette ?')" class="btn btn-danger">Supprimer</a>
 							</td>
 						</tr>
 					{% endfor %}
 				</tbody>
 			</table>
 			<div class="count mt-4">
-				{{ ingredients.getTotalItemCount }}
-				ingrédients au total
+				{{ recipes.getTotalItemCount }}
+				recettes au total
 			</div>
 			<div class="navigation d-flex justify-content-center mt-4">
-				{{ knp_pagination_render(ingredients) }}
+				{{ knp_pagination_render(recipes) }}
 			</div>
 		{% else %}
-			<h4>Il n'y a pas d'ingrédient</h4>
+			<h4>Il n'y a pas de recette</h4>
 		{% endif %}
 
 	</div>
