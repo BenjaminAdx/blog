@@ -1,11 +1,11 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% block title %}ChezBibi Inscription
+{% block title %}Chezbibi - Modification de l'utilisateur
 {% endblock %}
 
 {% block body %}
 	<div class="container mt-4">
-		<h1 class="mt-4">Formulaire d'inscription</h1>
+		<h1 class="mt-4">Formulaire de modification de l'utilisateur</h1>
 		{{ form_start(form) }}
 		<div class="form-group">
 			{{ form_label(form.fullName) }}
@@ -20,19 +20,6 @@
 			{{ form_widget(form.pseudo) }}
 			<div class="form-error mt-4">
 				{{ form_errors(form.pseudo) }}
-			</div>
-		</div>
-		<div class="form-group">
-			{{ form_label(form.email)}}
-			{{ form_widget(form.email) }}
-			<div class="form-error mt-4">
-				{{ form_errors(form.email) }}
-			</div>
-		</div>
-		<div class="form-group">
-			{{ form_widget(form.plainPassword) }}
-			<div class="form-error mt-4">
-				{{ form_errors(form.plainPassword) }}
 			</div>
 		</div>
 		<div class="form-group">
