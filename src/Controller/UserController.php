@@ -64,6 +64,7 @@ class UserController extends AbstractController
 
             if ($hasher->isPasswordValid($user, $form->getData()['plainPassword'])) {
 
+                $user->setUpdatedAt(new \DateTimeImmutable);
                 $user->setPlainPassword($form->getData()['newPassword']);
 
                 $manager->persist($user);
