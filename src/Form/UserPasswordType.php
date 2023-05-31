@@ -52,11 +52,4 @@ class UserPasswordType extends AbstractType
                 'label' => "Modifier mon mot de passe"
             ]);
     }
-
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => User::class,
-        ]);
-    }
 }

@@ -48,7 +48,7 @@ class UserController extends AbstractController
         ]);
     }
     #[Route('/utilisateur/edition-mot-de-passe/{id}', 'user.edit.password', methods: ['GET', 'POST'])]
-    public function editPassword(User $user, Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response
+    public function editPassword(User $user, Request $request, UserPasswordHasherInterface $hasher, EntityManagerInterface $manager): Response
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('security.login');
@@ -61,10 +61,12 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             if ($hasher->isPasswordValid($user, $form->getData()['plainPassword'])) {
+
                 $user->setPlainPassword($form->getData()['newPassword']);
 
-                $manager->persist($user['password']);
+                $manager->persist($user);
                 $manager->flush();
 
                 $this->addFlash('success', 'Mot de passe modifié avec succès');
