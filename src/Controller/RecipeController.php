@@ -38,6 +38,14 @@ class RecipeController extends AbstractController
         ]);
     }
 
+    #[Route('/recette/{id}', name: 'recipe.show', methods: ['GET'])]
+    public function show(Recipe $recipe): Response
+    {
+        return $this->render('pages/recipe/show.html.twig', [
+            'recipe' => $recipe
+        ]);
+    }
+
     /**
      * This function add a new recipe
      *
