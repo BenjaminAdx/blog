@@ -11,19 +11,43 @@
 						<span class="visually-hidden">(current)</span>
 					</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link active" href="{{ path('ingredient.index') }}">Mes Ingrédients
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link active" href="{{ path('recipe.index') }}">Mes Recettes
-					</a>
-				</li>
+				{% if app.user %}
+					<li class="nav-item">
+						<a class="nav-link active" href="{{ path('ingredient.index') }}">Mes Ingrédients
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="{{ path('recipe.index') }}">Mes Recettes
+						</a>
+					</li>
+				{% endif %}
 			</ul>
+
 			<form class="d-flex">
-				<button class="btn btn-secondary my-2 my-sm-0">
-					<a href="{{ path('security.login') }}">Se connecter</a>
-				</button>
+				{% if app.user %}
+					<div class="btn-group">
+						<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+							{{ app.user.fullName }}
+						</button>
+						<ul class="dropdown-menu dropdown-menu-end">
+							<li>
+								<a class="dropdown-item" href="{{ path('user.edit') }}">Modifier mon profil</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('user.edit.password') }}">Modifier mon mot de passe</a>
+							</li>
+							<div class="dropdown-divider"></div>
+							<li>
+								<a class="dropdown-item" href="#">Se déconnecter</a>
+							</li>
+						</ul>
+					</div>
+				{% endif %}
+				{% if app.user is null %}
+					<button class="btn btn-secondary my-2 my-sm-0">
+						<a href="{{ path('security.login') }}">Se connecter</a>
+					</button>
+				{% endif %}
 			</form>
 		</div>
 	</div>
