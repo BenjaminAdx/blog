@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Form\UserPasswordType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,20 +23,15 @@ class UserController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */ #[Route('/utilisateur/edition/{id}', 'user.edit', methods: ['GET', 'POST'])]
-    public function edit(User $user, Request $request, EntityManagerInterface $manager): Response
+    #[Security("is_granted('ROLE_USER') and user === choosenUser")]
+    public function edit(User $choosenUser, Request $request, EntityManagerInterface $manager): Response
     {
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('security.login');
-        }
-        if ($this->getUser() !== $user) {
-            return $this->redirectToRoute('security.logout');
-        }
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $choosenUser);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form->getData();
-            $manager->persist($user);
+            $choosenUser = $form->getData();
+            $manager->persist($choosenUser);
             $manager->flush();
 
             $this->addFlash('success', 'Profil modifié avec succès');
@@ -48,26 +44,20 @@ class UserController extends AbstractController
         ]);
     }
     #[Route('/utilisateur/edition-mot-de-passe/{id}', 'user.edit.password', methods: ['GET', 'POST'])]
-    public function editPassword(User $user, Request $request, UserPasswordHasherInterface $hasher, EntityManagerInterface $manager): Response
+    #[Security("is_granted('ROLE_USER') and user === choosenUser")]
+    public function editPassword(User $choosenUser, Request $request, UserPasswordHasherInterface $hasher, EntityManagerInterface $manager): Response
     {
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('security.login');
-        }
-        if ($this->getUser() !== $user) {
-            return $this->redirectToRoute('security.logout');
-        }
-
         $form = $this->createForm(UserPasswordType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if ($hasher->isPasswordValid($user, $form->getData()['plainPassword'])) {
+            if ($hasher->isPasswordValid($choosenUser, $form->getData()['plainPassword'])) {
 
-                $user->setUpdatedAt(new \DateTimeImmutable);
-                $user->setPlainPassword($form->getData()['newPassword']);
+                $choosenUser->setUpdatedAt(new \DateTimeImmutable);
+                $choosenUser->setPlainPassword($form->getData()['newPassword']);
 
-                $manager->persist($user);
+                $manager->persist($choosenUser);
                 $manager->flush();
 
                 $this->addFlash('success', 'Mot de passe modifié avec succès');
