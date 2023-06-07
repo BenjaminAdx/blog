@@ -1,21 +1,13 @@
 {% extends "base.html.twig" %}
 
-{% block title %}ChezBibi - Accueil
+{% block title %}ChezBibi -
+																												Recette partagée par la communautée
 {% endblock %}
 
 {% block body %}
 	<div class="container mt-4">
-		<div class="jumbotron">
-			<h1 class="display-4">Bienvenue ChezBibi</h1>
-			<p class="lead">ChezBibi est une application qui va te permettre de créer des recettes. Tu pourras partager tes recettes ou bien les garder privées.</p>
-			<hr class="my-4">
-			<p>Pour commencer rendez-vous sur la page d'inscription pour utiliser l'application</p>
-			<p class="lead">
-				<a class="btn btn-primary btn-lg" href="{{ path('security.registration') }}" role="button">Inscription</a>
-			</p>
-
-			<h2 class="mt-4">Recettes de la communautée</h2>
-
+		<h1>Les recettes partagées par la communautée</h1>
+		{% if not recipes.items is same as([]) %}
 			<div class="d-flex justify-content-around flex-wrap">
 				{% for recipe in recipes %}
 					<div class="card text-white bg-primary mb-2 mt-4" style="max-width: 25rem;">
@@ -28,7 +20,11 @@
 					</div>
 				{% endfor %}
 			</div>
-
-		</div>
+			<div class="navigation d-flex justify-content-center mt-4">
+				{{ knp_pagination_render(recipes) }}
+			</div>
+		{% else %}
+			<h4>Il n'y a pas de recette partagée.</h4>
+		{% endif %}
 	</div>
 {% endblock %}
