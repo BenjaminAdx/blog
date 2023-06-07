@@ -54,7 +54,7 @@ class RecipeController extends AbstractController
     }
 
     #[Security("recipe.isIsPublic() === true or (is_granted('ROLE_USER') and user === recipe.getUser())")]
-    #[Route('/recette/{id}', name: 'recipe.show', methods: ['GET'])]
+    #[Route('/recette/{id<\d+>}', name: 'recipe.show', methods: ['GET'])]
     public function show(Recipe $recipe): Response
     {
         return $this->render('pages/recipe/show.html.twig', [
@@ -68,8 +68,10 @@ class RecipeController extends AbstractController
      * @param Request $request
      * @param EntityManagerInterface $manager
      * @return Response
-     */ #[Route('/recette/nouvelle', 'recipe.new', methods: ['GET', 'POST'])]
+     */
+
     #[IsGranted('ROLE_USER')]
+    #[Route('/recette/nouvelle', name: 'recipe.new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $recipe = new Recipe();
@@ -84,6 +86,7 @@ class RecipeController extends AbstractController
             $manager->flush();
 
             $this->addFlash('success', 'Recette ajoutée avec succès');
+
             return $this->redirectToRoute('recipe.index');
         }
 

@@ -57,6 +57,13 @@
 				{{ form_errors(form.isFavorite) }}
 			</div>
 		</div>
+		<div class="form-check form-switch">
+			{{ form_label(form.isPublic)}}
+			{{ form_widget(form.isPublic) }}
+			<div class="form-error mt-4">
+				{{ form_errors(form.isPublic) }}
+			</div>
+		</div>
 		<div class="form-group">
 			{{ form_label(form.ingredients)}}
 			{{ form_widget(form.ingredients) }}

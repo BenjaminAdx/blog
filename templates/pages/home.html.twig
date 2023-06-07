@@ -9,10 +9,12 @@
 			<h1 class="display-4">Bienvenue ChezBibi</h1>
 			<p class="lead">ChezBibi est une application qui va te permettre de créer des recettes. Tu pourras partager tes recettes ou bien les garder privées.</p>
 			<hr class="my-4">
-			<p>Pour commencer rendez-vous sur la page d'inscription pour utiliser l'application</p>
-			<p class="lead">
-				<a class="btn btn-primary btn-lg" href="{{ path('security.registration') }}" role="button">Inscription</a>
-			</p>
+			{% if not app.user %}
+				<p>Pour commencer rendez-vous sur la page d'inscription pour utiliser l'application</p>
+				<p class="lead">
+					<a class="btn btn-primary btn-lg" href="{{ path('security.registration') }}" role="button">Inscription</a>
+				</p>
+			{% endif %}
 
 			<h2 class="mt-4">Recettes de la communautée</h2>
 
@@ -30,5 +32,8 @@
 			</div>
 
 		</div>
+		{% if app.user %}
+			<a href="{{ path('recipe.index.public') }}" class="btn btn-primary mt-4">Toutes les recettes</a>
+		{% endif %}
 	</div>
 {% endblock %}
