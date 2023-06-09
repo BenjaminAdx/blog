@@ -6,6 +6,11 @@
 
 {% block body %}
 	<div class="container">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success mt-4">
+				{{ message }}
+			</div>
+		{% endfor %}
 		<h1 class="mt-4 text-center">{{ recipe.name }}</h1>
 		<span class="badge bg-primary">Créée le
 			{{ recipe.createdAt|date('d/m/Y') }}</span>
@@ -47,6 +52,13 @@
 		{% else %}
 			<p class="mt-4 text-primary">Prix : Non renseigné</p>
 		{% endif %}
+		{% if recipe.average %}
+			<p class="mt-4 text-primary">Note moyenne:
+				{{recipe.average}}
+				/ 5</p>
+		{% else %}
+			<p class="mt-4 text-primary">Note moyenne: Non renseigné</p>
+		{% endif %}
 		<h3>Liste des Ingrédients</h3>
 		<ul class="list-group">
 			{% for ingredient in recipe.ingredients %}
@@ -59,5 +71,19 @@
 		<div class="mt-4 text-primary">
 			<h3>Description</h3>
 			{{ recipe.description | raw }}</div>
+		<small class="text-muted">Recette conçue par
+			{{ recipe.user.pseudo }}</small>
+		{{ form_start(form)}}
+		<div class="form-group">
+			{% if mark %}
+				<p class="mt-4 text-primary">Modifié la note que vous avez mis à cette recette</p>
+			{% endif %}
+			{{ form_label(form.mark) }}
+			{{ form_widget(form.mark) }}
+		</div>
+		<div class="form-group">
+			{{ form_row(form.submit) }}
+		</div>
+		{{ form_end(form) }}
 	</div>
 {% endblock %}

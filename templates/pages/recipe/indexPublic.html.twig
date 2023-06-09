@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block title %}ChezBibi -
-																												Recette partagée par la communautée
+																																Recette partagée par la communautée
 {% endblock %}
 
 {% block body %}
@@ -15,6 +15,13 @@
 						<div class="card-body">
 							<h4 class="card-title">{{ recipe.name }}</h4>
 							<p class="card-text">{{ recipe.description|slice(0,100) ~ '...' }}</p>
+							{% if recipe.average %}
+								<p class="mt-4 card-text">Note moyenne:
+									{{recipe.average}}
+									/ 5</p>
+							{% else %}
+								<p class="mt-4 card-text">Note moyenne: Non renseigné</p>
+							{% endif %}
 							<a href="{{ path('recipe.show', {'id': recipe.id}) }}" class="btn btn-primary">Voir la recette</a>
 						</div>
 					</div>
