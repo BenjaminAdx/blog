@@ -58,12 +58,13 @@ class RecipeController extends AbstractController
 
     #[Security("recipe.isIsPublic() === true or (is_granted('ROLE_USER') and user === recipe.getUser())")]
     #[Route('/recette/{id<\d+>}', name: 'recipe.show', methods: ['GET', 'POST'])]
-    public function show(Recipe $recipe, EntityManagerInterface $manager, Request $request, MarkRepository $markRepository, Mark $mark): Response
+    public function show(Recipe $recipe, EntityManagerInterface $manager, Request $request, MarkRepository $markRepository): Response
     {
         $existingMark = $markRepository->findOneBy(['user' => $this->getUser(), 'recipe' => $recipe]);
-
         if (!$existingMark) {
             $mark = new Mark();
+        } else {
+            $mark = $existingMark;
         }
         $form = $this->createForm(MarkType::class, $mark);
 
