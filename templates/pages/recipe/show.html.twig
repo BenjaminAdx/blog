@@ -73,19 +73,21 @@
 			{{ recipe.description | raw }}</div>
 		<small class="text-muted">Recette conçue par
 			{{ recipe.user.pseudo }}</small>
-		{{ form_start(form)}}
-		<div class="form-group">
-			{% if existingMark %}
-				<p class="mt-4 text-primary">Modifié ma note de
-					{{ mark.mark }}
-					pour cette recette</p>
-			{% endif %}
-			{{ form_label(form.mark) }}
-			{{ form_widget(form.mark) }}
-		</div>
-		<div class="form-group">
-			{{ form_row(form.submit) }}
-		</div>
-		{{ form_end(form) }}
+		{% if app.user.id != recipe.user.id %}
+			{{ form_start(form)}}
+			<div class="form-group">
+				{% if existingMark %}
+					<p class="mt-4 text-primary">Modifié ma note de
+						{{ mark.mark }}
+						pour cette recette</p>
+				{% endif %}
+				{{ form_label(form.mark) }}
+				{{ form_widget(form.mark) }}
+			</div>
+			<div class="form-group">
+				{{ form_row(form.submit) }}
+			</div>
+			{{ form_end(form) }}
+		{% endif %}
 	</div>
 {% endblock %}
