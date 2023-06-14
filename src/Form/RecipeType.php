@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Security\Core\Security;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -50,6 +51,18 @@ class RecipeType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Photo de la recette',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'imagine_pattern' => 'product_photo_320x240',
+                'download_label' => 'Télécharger la photo',
+                'delete_label' => 'Supprimer la photo',
             ])
             ->add('time', IntegerType::class, [
                 'attr' => [

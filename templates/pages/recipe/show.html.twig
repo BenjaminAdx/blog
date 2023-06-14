@@ -37,15 +37,15 @@
 		{% endif %}
 		{% if recipe.price %}
 			{% if recipe.price < 15.00 %}
-				<span class="badge bg-success">Prix:
+				<span class="badge bg-success mt-4">Prix:
 					{{recipe.price}}
 					€</span>
 			{% elseif recipe.price > 15.00 and recipe.price < 30.00 %}
-				<span class="badge bg-warning">Prix:
+				<span class="badge bg-warning mt-4">Prix:
 					{{recipe.price}}
 					€</span>
 			{% else %}
-				<span class="badge bg-danger">Prix:
+				<span class="badge bg-danger mt-4">Prix:
 					{{recipe.price}}
 					€</span>
 			{% endif %}
@@ -68,8 +68,11 @@
 				</li>
 			{% endfor %}
 		</ul>
+		<div class="mt-4">
+			<img src="{{ vich_uploader_asset(recipe,'imageFile')}}" alt="{{ recipe.imageName }}" class="img-thumbnail">
+		</div>
+
 		<div class="mt-4 text-primary">
-			<h3>Description</h3>
 			{{ recipe.description | raw }}</div>
 		<small class="text-muted">Recette conçue par
 			{{ recipe.user.pseudo }}</small>

@@ -16,6 +16,14 @@
 		</div>
 
 		<div class="form-group">
+			{{ form_label(form.imageFile) }}
+			{{ form_widget(form.imageFile) }}
+			<div class="form-error mt-4">
+				{{ form_errors(form.imageFile) }}
+			</div>
+		</div>
+
+		<div class="form-group">
 			{{ form_label(form.time)}}
 			{{ form_widget(form.time) }}
 			<div class="form-error mt-4">
