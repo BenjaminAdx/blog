@@ -21,11 +21,10 @@ class Ingredient
     #[Assert\Length(min: 2, max: 50)]
     private ?string $name = null;
 
-    #[ORM\Column]
-    #[Assert\NotNull()]
-    #[Assert\Positive(message: 'Le prix doit être positif')]
-    #[Assert\LessThan(200, message: 'Le prix doit être inférieur à 200 €')]
-    private ?float $price = null;
+    #[ORM\Column(length: 50)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 1, max: 50)]
+    private ?string $quantity = null;
 
     #[ORM\Column]
     #[Assert\NotNull()]
@@ -59,14 +58,14 @@ class Ingredient
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getQuantity(): ?string
     {
-        return $this->price;
+        return $this->quantity;
     }
 
-    public function setPrice(float $price): self
+    public function setQuantity(string $quantity): self
     {
-        $this->price = $price;
+        $this->quantity = $quantity;
 
         return $this;
     }

@@ -38,15 +38,14 @@ class IngredientType extends AbstractType
                 ],
 
             ])
-            ->add('price', MoneyType::class, [
+            ->add('quantity', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => 'Prix',
+                'label' => 'Quantité (précisé grammes, litres, ...)',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
-                'currency' => 'EUR'
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [

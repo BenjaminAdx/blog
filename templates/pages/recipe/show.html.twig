@@ -64,7 +64,7 @@
 			{% for ingredient in recipe.ingredients %}
 				<li class="list-group-item list-group-item-primary d-flex justify-content-between align-items-center">
 					{{ ingredient.name }}
-					<span class="badge bg-primary rounded-pill">{{ ingredient.price }}</span>
+					<span class="badge bg-primary rounded-pill">{{ ingredient.quantity }}</span>
 				</li>
 			{% endfor %}
 		</ul>

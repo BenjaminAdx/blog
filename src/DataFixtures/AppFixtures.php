@@ -40,7 +40,7 @@ class AppFixtures extends Fixture
         for ($i = 1; $i <= 50; $i++) {
             $ingredient = new Ingredient();
             $ingredient->setName($this->faker->word())
-                ->setPrice(mt_rand(0, 100))
+                ->setQuantity($this->faker->word())
                 ->setUser($users[mt_rand(0, count($users) - 1)]);
 
             $ingredients[] = $ingredient;

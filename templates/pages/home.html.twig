@@ -24,7 +24,9 @@
 						<div class="card-header">Recette N°{{ recipe.id }}</div>
 						<div class="card-body">
 							<h4 class="card-title">{{ recipe.name }}</h4>
-							<p class="card-text">{{ recipe.description|slice(0,100) ~ '...' }}</p>
+							<div class="mt-4">
+								<img src="{{ vich_uploader_asset(recipe,'imageFile')}}" alt="{{ recipe.imageName }}" class="img-thumbnail">
+							</div>
 							{% if recipe.average %}
 								<p class="mt-4 card-text">Note moyenne:
 									{{recipe.average}}
@@ -32,6 +34,8 @@
 							{% else %}
 								<p class="mt-4 card-text">Note moyenne: Non renseigné</p>
 							{% endif %}
+							<p>Ecrit par
+								{{ recipe.user.pseudo }}</p>
 							<a href="{{ path('recipe.show', {'id': recipe.id}) }}" class="btn btn-primary">Voir la recette</a>
 						</div>
 					</div>
