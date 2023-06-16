@@ -94,7 +94,7 @@ class RecipeType extends AbstractType
                     'min' => 1,
                     'max' => 5
                 ],
-                'label' => 'Difficulté',
+                'label' => 'Difficulté',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
