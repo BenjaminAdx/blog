@@ -22,3 +22,31 @@ Mettre en Favoris ?: Mettre en favoris ?
 Mettre en Publique ?: Mettre en publique ?
 Difficulté: Difficulté
 Quantité (précisé grammes, litres, ...): Quantité (précisé grammes, litres, ...)
+Dashboard: Dashboard
+Utilisateur: Utilisateur
+Utilisateurs: Utilisateurs
+Ingrédient: Ingrédient
+Ingrédients: Ingrédients
+Recette: Recette
+Recettes: Recettes
+Note: Note
+Notes: Notes
+ID: ID
+Full Name: Full Name
+Pseudo: Pseudo
+Email: Email
+Roles: Roles
+Created At: Created At
+Name: Name
+Quantity: Quantity
+Time: Time
+Nb People: Nb People
+Difficulty: Difficulty
+Price: Price
+Is Public: Is Public
+Ingredients: Ingredients
+Image File: Image File
+Is Favorite: Is Favorite
+Mark: Mark
+User.Full Name: User.Full Name
+Recipe.Name: Recipe.Name
