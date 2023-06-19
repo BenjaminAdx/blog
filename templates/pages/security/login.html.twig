@@ -26,8 +26,12 @@
 			<div class="form-group">
 				<label for="password" class="form-label mt-4">Mot de passe</label>
 				<input type="password" class="form-control" id="password" name="_password" placeholder="********" required>
+				<small id="emailHelp" class="form-text text-muted">
+					<a href="{{ path('app_forgot_password_request') }}">Mot de passe oublie?</a>
+				</small>
 			</div>
 			<button type="submit" class="btn btn-primary mt-4">Se connecter</button>
 		</form>
 	</div>
+
 {% endblock %}
