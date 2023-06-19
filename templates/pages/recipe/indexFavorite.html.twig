@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %}ChezBibi -
+																																							Recette partagée par la communautée
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-4">
+		<h1>Mes recettes favorites</h1>
+		{% if not recipes.items is same as([]) %}
+			<div class="d-flex justify-content-around flex-wrap">
+				{% for recipe in recipes %}
+					<div class="card text-white bg-primary mb-2 mt-4" style="max-width: 25rem;">
+						<div class="card-header">Recette N°{{ recipe.id }}</div>
+						<div class="card-body">
+							<h4 class="card-title">{{ recipe.name }}</h4>
+							<div class="mt-4">
+								<img src="{{ vich_uploader_asset(recipe,'imageFile')}}" alt="{{ recipe.imageName }}" class="img-thumbnail">
+							</div>
+							{% if recipe.average %}
+								<p class="mt-4 card-text">Note moyenne:
+									{{recipe.average}}
+									/ 5</p>
+							{% else %}
+								<p class="mt-4 card-text">Note moyenne: Non renseigné</p>
+							{% endif %}
+							<a href="{{ path('recipe.show', {'id': recipe.id}) }}" class="btn btn-primary">Voir la recette</a>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="navigation d-flex justify-content-center mt-4">
+				{{ knp_pagination_render(recipes) }}
+			</div>
+		{% else %}
+			<h4>Il n'y a pas de recette favorite.</h4>
+		{% endif %}
+	</div>
+{% endblock %}

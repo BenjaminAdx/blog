@@ -51,6 +51,17 @@ class RecipeRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAllFavorite($user): array
+    {
+        $queryBuilder = $this->createQueryBuilder('r')
+            ->Where('r.isFavorite = 1')
+            ->andWhere('r.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('r.createdAt', 'DESC');
+        return $queryBuilder->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Recipe[] Returns an array of Recipe objects
     //     */

@@ -56,6 +56,22 @@ class RecipeController extends AbstractController
         ]);
     }
 
+
+    #[IsGranted('ROLE_USER')]
+    #[Route('/recette/favoris', name: 'recipe.index.favorite', methods: ['GET'])]
+    public function indexFavorite(RecipeRepository $repository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $recipes = $paginator->paginate(
+            $repository->findAllFavorite(['user' => $this->getUser()]),
+            $request->query->getInt('page', 1),
+            6
+        );
+
+        return $this->render('pages/recipe/indexFavorite.html.twig', [
+            'recipes' => $recipes
+        ]);
+    }
+
     #[Security("recipe.isIsPublic() === true or (is_granted('ROLE_USER') and user === recipe.getUser())")]
     #[Route('/recette/{id<\d+>}', name: 'recipe.show', methods: ['GET', 'POST'])]
     public function show(Recipe $recipe, EntityManagerInterface $manager, Request $request, MarkRepository $markRepository): Response
