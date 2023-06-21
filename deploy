@@ -1,0 +1,2 @@
+#!/bin/sh
+rsync -av ./ andrieux@ssh-andrieux.alwaysdata.net:~/www/chezbibi --include=public --include=public/bundles --include=public/.htaccess --exclude=vendor/fakerphp --include=vendor --exclude-from=.gitignore --exclude=".*"
