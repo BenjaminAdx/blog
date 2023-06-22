@@ -63,6 +63,7 @@ class RecipeType extends AbstractType
                 'imagine_pattern' => 'product_photo_320x240',
                 'download_label' => 'Télécharger la photo',
                 'delete_label' => 'Supprimer la photo',
+                'required' => false,
             ])
             ->add('time', IntegerType::class, [
                 'attr' => [
