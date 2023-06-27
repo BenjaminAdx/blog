@@ -69,7 +69,7 @@
 			{% endfor %}
 		</ul>
 		<div class="mt-4">
-			<img src="{{ vich_uploader_asset(recipe,'imageFile')}}" alt="{{ recipe.imageName }}" class="img-thumbnail">
+			<img src="{{ app.request.getSchemeAndHttpHost() }}{{ vich_uploader_asset(recipe,'imageFile')}}" alt="{{ recipe.imageName }}" class="img-thumbnail">
 		</div>
 
 		<div class="mt-4 text-primary">

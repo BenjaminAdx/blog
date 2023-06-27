@@ -6,7 +6,7 @@
 {% block body %}
 	<div class="container mt-4">
 		<h1>Mes ingrédients</h1>
-		<a href="{{ path('ingredient.new') }}" class="btn btn-primary mt-4">Créer un ingrédient</a>
+		<a href="{{ app.request.getSchemeAndHttpHost() }}{{ path('ingredient.new') }}" class="btn btn-primary mt-4">Créer un ingrédient</a>
 
 		{# read and display just one flash message #}
 		{% for message in app.flashes('success') %}
@@ -34,10 +34,10 @@
 							<td>{{ingredient.quantity}}</td>
 							<td>{{ ingredient.createdAt|date("d/m/Y")}}</td>
 							<td>
-								<a href="{{ path('ingredient.edit', {'id': ingredient.id}) }}" class="btn btn-info">Modifier</a>
+								<a href="{{ app.request.getSchemeAndHttpHost() }}{{ path('ingredient.edit', {'id': ingredient.id}) }}" class="btn btn-info">Modifier</a>
 							</td>
 							<td>
-								<a href="{{ path('ingredient.delete', {'id': ingredient.id}) }}" onclick="return confirm('Voulez-vous vraiment supprimer cet ingrédient ?')" class="btn btn-danger">Supprimer</a>
+								<a href="{{ app.request.getSchemeAndHttpHost() }}{{ path('ingredient.delete', {'id': ingredient.id}) }}" onclick="return confirm('Voulez-vous vraiment supprimer cet ingrédient ?')" class="btn btn-danger">Supprimer</a>
 							</td>
 						</tr>
 					{% endfor %}

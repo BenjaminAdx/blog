@@ -36,13 +36,13 @@
 							<td>{{(recipe.price is null) ? 'Non renseigné' : recipe.price ~ ' €'}}</td>
 							<td>{{ recipe.createdAt|date("d/m/Y")}}</td>
 							<td>
-								<a href="{{ path('recipe.show', {'id': recipe.id}) }}" class="btn btn-info">Détails</a>
+								<a href="{{ app.request.getSchemeAndHttpHost() }}{{ path('recipe.show', {'id': recipe.id}) }}" class="btn btn-info">Détails</a>
 							</td>
 							<td>
-								<a href="{{ path('recipe.edit', {'id': recipe.id}) }}" class="btn btn-info">Modifier</a>
+								<a href="{{ app.request.getSchemeAndHttpHost() }}{{ path('recipe.edit', {'id': recipe.id}) }}" class="btn btn-info">Modifier</a>
 							</td>
 							<td>
-								<a href="{{ path('recipe.delete', {'id': recipe.id}) }}" onclick="return confirm('Voulez-vous vraiment supprimer cette recette ?')" class="btn btn-danger">Supprimer</a>
+								<a href="{{ app.request.getSchemeAndHttpHost() }}{{ path('recipe.delete', {'id': recipe.id}) }}" onclick="return confirm('Voulez-vous vraiment supprimer cette recette ?')" class="btn btn-danger">Supprimer</a>
 							</td>
 						</tr>
 					{% endfor %}

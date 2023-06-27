@@ -25,7 +25,7 @@
 						<div class="card-body">
 							<h4 class="card-title">{{ recipe.name }}</h4>
 							<div class="mt-4">
-								<img src="{{ vich_uploader_asset(recipe,'imageFile')}}" alt="{{ recipe.imageName }}" class="img-thumbnail">
+								<img src="{{ app.request.getSchemeAndHttpHost() }}{{ vich_uploader_asset(recipe,'imageFile')}}" alt="{{ recipe.imageName }}" class="img-thumbnail">
 							</div>
 							{% if recipe.average %}
 								<p class="mt-4 card-text">Note moyenne:
@@ -36,7 +36,7 @@
 							{% endif %}
 							<p>Ecrit par
 								{{ recipe.user.pseudo }}</p>
-							<a href="{{ path('recipe.show', {'id': recipe.id}) }}" class="btn btn-primary">Voir la recette</a>
+							<a href="{{ app.request.getSchemeAndHttpHost() }}{{ path('recipe.show', {'id': recipe.id}) }}" class="btn btn-primary">Voir la recette</a>
 						</div>
 					</div>
 				{% endfor %}
@@ -44,7 +44,7 @@
 
 		</div>
 		{% if app.user %}
-			<a href="{{ path('recipe.index.public') }}" class="btn btn-primary mt-4">Toutes les recettes</a>
+			<a href="{{ app.request.getSchemeAndHttpHost() }}{{ path('recipe.index.public') }}" class="btn btn-primary mt-4">Toutes les recettes</a>
 		{% endif %}
 	</div>
 {% endblock %}
